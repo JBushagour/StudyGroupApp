@@ -48,7 +48,6 @@ class ProfileEditHandler(webapp2.RequestHandler):
             if profile:
                 values['name'] = profile.name
                 values['school'] = profile.school
-                print(profile.school)
                 values['courses'] = profile.courses
             render_template(self, 'profile-edit.html', values)
 
