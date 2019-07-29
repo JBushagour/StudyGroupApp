@@ -48,6 +48,7 @@ class ProfileEditHandler(webapp2.RequestHandler):
             if profile:
                 values['name'] = profile.name
                 values['school'] = profile.school
+                print(profile.school)
                 values['courses'] = profile.courses
             render_template(self, 'profile-edit.html', values)
 
@@ -60,7 +61,6 @@ class ProfileSaveHandler(webapp2.RequestHandler):
         else:
             error_text = ''
             name = self.request.get("name")
-            courses = self.request.get("courses")
             school = self.request.get("school")
             values = get_template_parameters()
             name.strip()
