@@ -63,6 +63,8 @@ class ProfileSaveHandler(webapp2.RequestHandler):
             courses = self.request.get("courses")
             school = self.request.get("school")
             values = get_template_parameters()
+            name.strip()
+            name.replace(" ","&")
             values['name'] = name
             coursesList = []
             coursenum = 0
@@ -81,6 +83,7 @@ class ProfileSaveHandler(webapp2.RequestHandler):
                 values['successmsg'] = "Everything worked out fine."
             render_template(self, 'profile-edit.html', values)
 
+#
 
 class ProfileViewHandler(webapp2.RequestHandler):
     def get(self, profilename):
