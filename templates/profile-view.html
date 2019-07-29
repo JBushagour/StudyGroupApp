@@ -3,6 +3,8 @@
 
 <h1> {{name}} </h1>
 <h2> {{school}} </h2>
-{{courses|linebreaks}}
+{% for course in courses %}
+{{course}}
+{% endfor %}
 
 {% endblock %}

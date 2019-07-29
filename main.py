@@ -64,12 +64,20 @@ class ProfileSaveHandler(webapp2.RequestHandler):
             school = self.request.get("school")
             values = get_template_parameters()
             values['name'] = name
-            values['courses'] = courses
+            coursesList = []
+            coursenum = 0
+            course = self.request.get("classes0")
+            while course:
+                coursesList.append(course)
+                coursenum += 1
+                course = self.request.get("classes" + str(coursenum))
+            values['courses'] = coursesList
             values['school'] = school
+            groups = ["hello", "heirhooh"]
             if error_text:
                 values['errormsg'] = error_text
             else:
-                socialdata.save_profile(name, email, courses, school)
+                socialdata.save_profile(name, email, coursesList, school, groups)
                 values['successmsg'] = "Everything worked out fine."
             render_template(self, 'profile-edit.html', values)
 
