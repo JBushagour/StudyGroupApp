@@ -65,6 +65,17 @@ class ProfileSaveHandler(webapp2.RequestHandler):
             values = get_template_parameters()
             name.strip()
             name.replace(" ","&")
+            if len(name) > 60:
+                error_text += "Your name can't be more than 60 letters\n"
+            for i in name:
+                if i == '?':
+                    error_text += "Your name can't have ' ? '\n"
+                elif i == '\\':
+                    error_text += "Your name can't have ' \\ '\n"
+                elif i == '/':
+                    error_text += "Your name can't have ' / '\n"
+                elif i == '.':
+                    error_text += "Your name can't have ' . '\n"
             values['name'] = name
             coursesList = []
             coursenum = 0
