@@ -47,8 +47,8 @@ class ProfileEditHandler(webapp2.RequestHandler):
             profile = socialdata.get_user_profile(get_user_email())
             if profile:
                 values['name'] = profile.name
-                values['courses'] = profile.courses
                 values['school'] = profile.school
+                values['courses'] = profile.courses
             render_template(self, 'profile-edit.html', values)
 
 
@@ -83,7 +83,6 @@ class ProfileSaveHandler(webapp2.RequestHandler):
                 values['successmsg'] = "Everything worked out fine."
             render_template(self, 'profile-edit.html', values)
 
-#
 
 class ProfileViewHandler(webapp2.RequestHandler):
     def get(self, profilename):

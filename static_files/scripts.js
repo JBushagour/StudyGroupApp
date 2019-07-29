@@ -23,7 +23,7 @@ function collectClasses() {
 
 addButton.addEventListener("click", (event) => {
     collectClasses();
-    classes.push('your-class-name');
+    classes.push('');
     showClasses();
 });
 
