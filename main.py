@@ -47,7 +47,8 @@ class ProfileEditHandler(webapp2.RequestHandler):
             profile = socialdata.get_user_profile(get_user_email())
             if profile:
                 values['name'] = profile.name
-                values['description'] = profile.description
+                values['courses'] = profile.courses
+                values['school'] = profile.school
             render_template(self, 'profile-edit.html', values)
 
 
@@ -59,32 +60,18 @@ class ProfileSaveHandler(webapp2.RequestHandler):
         else:
             error_text = ''
             name = self.request.get("name")
-            description = self.request.get("description")
-
-            if len(name) < 2:
-                error_text += 'Name should be at least 2 characters. \n'
-            if len(name) > 20:
-                error_text += 'Name should be at least 2 characters. \n'
-            if len(name.split()) > 1:
-                error_text += 'Name should not have whitespace. \n'
-            if len(description) > 4000:
-                error_text += "Description should be less than 4000 characters. \n"
-            for word in description.split():
-                if len(word) > 50:
-                    error_text += "Description contains words that are too d*mn log. \n"
-                    break
-
+            courses = self.request.get("courses")
+            school = self.request.get("school")
             values = get_template_parameters()
             values['name'] = name
-            values['description'] = description
+            values['courses'] = courses
+            values['school'] = school
             if error_text:
                 values['errormsg'] = error_text
             else:
-                socialdata.save_profile(email, name, description)
+                socialdata.save_profile(name, email, courses, school)
                 values['successmsg'] = "Everything worked out fine."
             render_template(self, 'profile-edit.html', values)
-
-
 
 
 class ProfileViewHandler(webapp2.RequestHandler):
@@ -92,23 +79,16 @@ class ProfileViewHandler(webapp2.RequestHandler):
         profile = socialdata.get_profile_by_name(profilename)
         values = get_template_parameters()
         values['name'] = 'Unknown'
-        values['description'] = "Profile does not exist"
+        values['courses'] = "courses does not exist"
+        values['school'] = "school does not exist"
         if profile:
             values['name'] = profile.name
-            values['description'] = profile.description
+            values['courses'] = profile.courses
+            values['school'] = profile.school
         render_template(self, 'profile-view.html', values)
 
 
-class ProfileListHandler(webapp2.RequestHandler):
-    def get(self):
-        profiles = socialdata.get_recent_profiles()
-        values = get_template_parameters()
-        values['profiles'] = profiles
-        render_template(self, 'profile-list.html', values)
-
-
 app = webapp2.WSGIApplication([
-    ("/profile-list", ProfileListHandler),
     ('/p/(.*)', ProfileViewHandler),
     ("/profile-edit", ProfileEditHandler),
     ("/profile-save", ProfileSaveHandler),
