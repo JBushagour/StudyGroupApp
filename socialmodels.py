@@ -15,3 +15,4 @@ class Group(ndb.Model):
     member_limit = ndb.IntegerProperty()
     members = ndb.StringProperty(repeated=True)
     group_admin = ndb.StringProperty(required=True)
+    school = ndb.StringProperty(required=True)
