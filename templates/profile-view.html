@@ -2,8 +2,12 @@
 {% block content %}
 
 <h1> {{name}} </h1>
+<br><br>
+<h2> School: </h2>
 <h2> {{school}} </h2>
+<br><br>
 {% for course in courses %}
+<h2> Courses </h2>
 {{course}}
 {% endfor %}
 
