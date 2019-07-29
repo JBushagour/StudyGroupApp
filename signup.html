@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<style>
+body {
+background-color: white;
+
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+li a:hover {
+  background-color: #72DFE5;
+}
+h1 {
+  color: white;
+  background-color: black;
+  width: 300px;
+  height: -50px;
+  border: 5px solid white;
+  padding: 25px;
+  margin: 15px;
+  font-size: 30px;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+form  {
+  font-size: 20px;
+  
+    }
+submit {
+  font-size: 20px;
+    }
+</style>
+    
+    <ul>
+  <b><li><a class="active" href="#home">Home</a></li>
+  <li><a href="#signup">Sign Up</a></li>
+  <li><a href="#signin">Sign In</a></li>
+      <li><a href="#about">About</a></li></b>
+</ul>
+    <h1><center><i> Create Your Profile </i></center></h1> 
+     
+
+        
+<form>
+    <form method="post" action="/profile-save">
+ <fieldset>
+  <legend>Be sure you have your class schedule with you when creating your account!</legend>
+     <b>NAME<br></b><input type="text"><br>
+     <br><b>EMAIL</b><br> <input type="text"><br>
+     <br><b>CLASSES</b><br>       
+        <input type="text" name="classes"><br><br>
+        <input type="text" name="classes"><br><br>
+        <input type="text" name="classes"><br><br>
+        <input type="text" name="classes"><br><br>
+        <input type="text" name="classes"><br><br>
+        <input type="text" name="classes"><br><br>
+        <input type="text" name="classes"><br><br>
+        <input type="submit"><br><br>
+ </fieldset>
+</form>
+        
