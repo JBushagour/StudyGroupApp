@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
+  <head>
+      
+    </head>
 <style>
-body {
-background-color: white;
-
-}
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: auto;
-  background-color: #333;
+  background-color: black;
 }
 
 li {
@@ -48,27 +47,37 @@ form  {
   font-size: 20px;
   
     }
-submit {
+.button {
   font-size: 20px;
+  color: ;
     }
+  .logo img   {
+    position: absolute;
+    margin-top: -175px;
+    margin-left: 1230px;
+    height: 45px;
+    width: 55px;
+}
 </style>
     
     <ul>
   <b><li><a class="active" href="#home">Home</a></li>
-  <li><a href="#signup">Sign Up</a></li>
-  <li><a href="#signin">Sign In</a></li>
+  <!--<li><a href="#signup">Sign Up</a></li>-->
+  <!--<li><a href="#signin">Sign In</a></li>-->
       <li><a href="#about">About</a></li></b>
 </ul>
     <h1><center><i> Create Your Profile </i></center></h1> 
-     
+     <body> <div class="logo"><a href="https://imgbb.com/"><img src="https://i.ibb.co/SXMrttq/book.png" alt="book" border="0"></a>
+    </div>
+    </body>
 
         
 <form>
     <form method="post" action="/profile-save">
  <fieldset>
   <legend>Be sure you have your class schedule with you when creating your account!</legend>
-     <b>NAME<br></b><input type="text"><br>
-     <br><b>EMAIL</b><br> <input type="text"><br>
+     <b>NAME<br></b><input type="text" value="{{name}}"><br>
+     <br><b>SCHOOL</b><br> <input type="text" value="{{school}}"><br>
      <br><b>CLASSES</b><br>       
         <input type="text" name="classes"><br><br>
         <input type="text" name="classes"><br><br>
@@ -77,7 +86,11 @@ submit {
         <input type="text" name="classes"><br><br>
         <input type="text" name="classes"><br><br>
         <input type="text" name="classes"><br><br>
-        <input type="submit"><br><br>
+        <input type="submit" value="Complete"><br><br>
  </fieldset>
 </form>
-        
+ 
+    <p2 style="float: right; margin-right: 77px; color: white; margin-top: -742px; font-size: 25px; font-family:georgia;"><b>studiGroup</b></p2>
+
+    </html>
+    
