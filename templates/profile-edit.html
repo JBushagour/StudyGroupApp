@@ -6,8 +6,19 @@
     <input type="text" name="name" value="{{name}}"><br><br>
     <input type="text" name="school" value"{{school}}"><br><br>
     Profile:<br>
-    <textarea name="courses" rows="16">{{courses}}</textarea><br><br>
+    <br><b>CLASSES</b><br>
+    <div id="MyClasses">
+    </div>
+    <button id="add" type="button">add Class</button>
+    <button id="remove" type="button">remove Class</button>
+    <br><br>
     <input type="submit">
 </form>
-
+<script src="/i/scripts.js"></script>
+<script>
+    {% for course in courses %}
+    classes.push('{{course}}');
+    {% endfor %}
+    showClasses();
+</script>
 {% endblock %}
