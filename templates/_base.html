@@ -11,6 +11,13 @@
             <a href="{{logout_url}}">Logout</a>
             <a href="/profile-edit">Edit Profile</a>
             <a href="/p/{{name}}">View Profile</a>
+            <div class="dropdown">
+                <button class="dropbtn">Groups</button>
+                <div class="dropdown-content">
+                    <a href="#">View groups</a>
+                    <a href="#">Create groups</a>
+                    </div>
+                </div>
             {% endif %}
         </div>
         {% if successmsg %}

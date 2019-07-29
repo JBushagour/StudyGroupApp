@@ -108,6 +108,9 @@ class ProfileViewHandler(webapp2.RequestHandler):
         render_template(self, 'profile-view.html', values)
 
 
+
+
+
 app = webapp2.WSGIApplication([
     ('/p/(.*)', ProfileViewHandler),
     ("/profile-edit", ProfileEditHandler),
