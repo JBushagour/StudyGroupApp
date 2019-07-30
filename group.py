@@ -40,14 +40,9 @@ class GroupSaveHandler(webapp2.RequestHandler):  #Handles /group-save
             members.append(helpers.get_user_email())
             group_admin = helpers.get_user_email()
             school = profile.school
-            groups = socialdata.get_profile_groups(helpers.get_user_email()) #we get a list of the users previous groups
-            groups.append(group_name) #we add this group on to it
-            socialdata.save_profile(profile.name, profile.email, profile.courses, profile.school, groups) #save the profile with the change to the groups
             values = helpers.get_template_parameters()
-            group_name.strip() #lines 47- 59 are name nonos
+            group_name.strip() #lines 49- 57 are name nonos
             group_name.replace(" ", "&")
-            if len(group_name) > 20:
-                error_text += "Your name can't be more than 20 letters\n"
             for i in group_name:
                 if i == '?':
                     error_text += "Your name can't have ' ? '\n"
@@ -62,9 +57,14 @@ class GroupSaveHandler(webapp2.RequestHandler):  #Handles /group-save
             values['description'] = description
             values['member_limit'] = member_limit
             values['name'] = profile.name
+            if group_data.get_group_by_name(group_name):
+                error_text += "This group name is already taken"
             if error_text: #print error text if there's a problem
                 values['errormsg'] = error_text
             else:
+                groups = socialdata.get_profile_groups(helpers.get_user_email()) #we get a list of the users previous groups
+                groups.append(group_name) #we add this group on to it
+                socialdata.save_profile(profile.name, profile.email, profile.courses, profile.school, groups) #save the profile with the change to the groups
                 group_data.save_group(group_name, description, course, int(member_limit), members, group_admin, school) #print success message if no problem saving
                 values['successmsg'] = "Everything worked out fine."
             helpers.render_template(self, 'group-edit.html', values) #go back to edit render
