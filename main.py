@@ -5,14 +5,14 @@ import helpers
 import group
 
 
-class MainHandler(webapp2.RequestHandler):
+class MainHandler(webapp2.RequestHandler): #handles the main page
     def get(self):
         values = helpers.get_template_parameters()
-        if helpers.get_user_email():
+        if helpers.get_user_email(): #checks to see if signed in
             profile = socialdata.get_user_profile(helpers.get_user_email())
-            if profile:
+            if profile: #if the profile exists, we can click on profile-view
                 values['name'] = profile.name
-        helpers.render_template(self, 'mainpage.html', values)
+        helpers.render_template(self, 'mainpage.html', values)  # shows page
 
 
 app = webapp2.WSGIApplication([
