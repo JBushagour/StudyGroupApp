@@ -7,7 +7,7 @@ def save_profile(name, email, courses, school, groups):
         p.name = name
         p.courses = courses
         p.school = school
-        if p.groups != "NOCHANGE":
+        if groups != "NOCHANGE":
             p.groups = groups
     else:
         if groups == "NOCHANGE":
