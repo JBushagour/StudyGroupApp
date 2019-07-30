@@ -29,6 +29,7 @@ class ProfileSaveHandler(webapp2.RequestHandler):
             values = helpers.get_template_parameters()
             name.strip()
             name.replace(" ", "&")
+            # Restricts the name choices for the user
             if len(name) > 60:
                 error_text += "Your name can't be more than 60 letters\n"
             for i in name:
