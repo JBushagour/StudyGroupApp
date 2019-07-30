@@ -71,14 +71,20 @@ class GroupSaveHandler(webapp2.RequestHandler):  #Handles /group-save
 
 
 class GroupViewHandler(webapp2.RequestHandler):  #Handles /group-view, CURRENTLY NONFUNCTIONAL
-    def get(self, profilename):
-        profile = socialdata.get_profile_by_name(profilename)
+    def get(self, groupname):
+        group = group_data.get_group_by_name(groupname)
         values = helpers.get_template_parameters()
         values['name'] = 'Unknown'
-        values['courses'] = ["courses does not exist", ""]
-        values['school'] = "school does not exist"
-        if profile:
-            values['name'] = profile.name
-            values['courses'] = profile.courses
-            values['school'] = profile.school
-        helpers.render_template(self, 'profile-view.html', values)
+        values['course'] = "no course"
+        values['school'] = "no school"
+        values['description'] = "no description"
+        values['members'] = [""]
+        values['admin'] = "unknown admin"
+        if group:
+            values['name'] = group.name
+            values['course'] = group.course
+            values['school'] = group.school
+            values['description'] = group.description
+            values['members'] = group.members
+            values['admin'] = group.group_admin
+        helpers.render_template(self, 'group-view.html', values)

@@ -2,7 +2,8 @@
 {% block content %}
     <br><b>Groups You've Made</b><br>
     {% for group in groups %}
-    {{group}}
+    <a href="/g/{{group}}">{{group}}</a>
+    
     <br>
     {% endfor %}
     <br><br>
