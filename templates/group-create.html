@@ -1,0 +1,10 @@
+{% extends "_base.html" %}
+{% block content %}
+    <br><b>Groups You've Made</b><br>
+    {% for group in groups %}
+    {{group}}
+    <br>
+    {% endfor %}
+    <br><br>
+    <a href="/group-edit" id="edit_button">Create Group</a>
+{% endblock %}

@@ -7,8 +7,11 @@ def save_profile(name, email, courses, school, groups):
         p.name = name
         p.courses = courses
         p.school = school
-        p.groups = groups
+        if p.groups != "NOCHANGE":
+            p.groups = groups
     else:
+        if groups == "NOCHANGE":
+            groups = []
         p = UserProfile(email=email, name=name, courses=courses, school=school, groups=groups)
     p.put()
 

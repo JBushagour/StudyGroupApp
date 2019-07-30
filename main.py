@@ -2,6 +2,7 @@ import socialdata
 import webapp2
 import profile
 import helpers
+import group
 
 
 class MainHandler(webapp2.RequestHandler):
@@ -18,5 +19,8 @@ app = webapp2.WSGIApplication([
     ('/p/(.*)', profile.ProfileViewHandler),
     ("/profile-edit", profile.ProfileEditHandler),
     ("/profile-save", profile.ProfileSaveHandler),
+    ("/group-create", group.GroupCreateHandler),
+    ("/group-edit", group.GroupEditHandler),
+    ("/group-save", group.GroupSaveHandler),
     ('.*', MainHandler)
 ])

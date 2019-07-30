@@ -50,7 +50,7 @@ class ProfileSaveHandler(webapp2.RequestHandler):
                 course = self.request.get("classes" + str(coursenum))
             values['courses'] = coursesList
             values['school'] = school
-            groups = ["hello", "heirhooh"]
+            groups = "NOCHANGE"
             if error_text:
                 values['errormsg'] = error_text
             else:
