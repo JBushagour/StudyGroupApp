@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <link rel="stylesheet" type="text/css" href="sb.css">
+
     </head>
 <style>
+<!-- style attributes for the nav bar that appears on every page -->
 ul {
   list-style-type: none;
   margin: 0;
@@ -31,6 +32,7 @@ li a {
 li a:hover {
   background-color: #72DFE5;
 }
+<-- style attributes for the page header including a box and a greenish bluish border for the box -->
 h1 {
   color: white;
   background-color: black;
@@ -47,15 +49,13 @@ h1 {
   font-family: sans-serif;
 
 }
+<!-- changes the attributes of the form text such as the font and size -->
 form  {
   font-size: 20px;
   font-family: sans-serif;
   
     }
-.button {
-  font-size: 20px;
-  color: ;
-    }
+<!-- placement and size of the logo image that is in the top right hand corner -->
   .logo img   {
     position: absolute;
     margin-top: -175px;
@@ -64,7 +64,7 @@ form  {
     width: 55px;
 }
 </style>
-    
+  <!-- contents of the nav bar in the top left corner -->  
     <ul>
   <b><li><a class="active" href="sb.html">HOME</a></li>
   <li><a href="signup.html">VIEW PROFILE</a></li>
@@ -72,12 +72,12 @@ form  {
       <li><a href="eligiblecourses.html">GROUPS</a></li>
       <li><a href="about.html">ABOUT US</a></li></b>
 </ul>
-    
+    <!-- header box and lower content for the page -->
     <h1><center><i> Active Groups</i></center></h1> 
      <body> <div class="logo"><a href="https://imgbb.com/"><img src="https://i.ibb.co/SXMrttq/book.png" alt="book" border="0"></a>
     </div>
     </body>
-
+<!-- this part of the page will list all the groups that a user is in and has created -->
 <form>
     <form method="post" action="/view-group">
  <fieldset>
@@ -86,11 +86,11 @@ form  {
      <br><b>PROFESSOR</b><br> <input type="text"><br>
      <br><b>GROUP MEETING TIME</b><br> <input type="time"><br>      
         
-     
+     <!-- this line separates the different groups on the page -->
      <hr size="2" color="#72DFE5">
  </fieldset>
 </form>
-    
+    <!-- this part of the page will list all the groups that a user is in that they have not created -->
     <form>
     <form method="get" action="/view-group">
  <fieldset>
@@ -103,7 +103,7 @@ form  {
      <hr size="2" color="#72DFE5">
  </fieldset>
 </form>
- 
+ <!-- style of the text that goes in the top right corner -->
     <p2 style="float: right; margin-right: 95px; color: white; margin-top: -683px; font-size: 25px; font-family:sans-serif;"><b>StudiGroup</b></p2>
 
     </html>
