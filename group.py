@@ -6,11 +6,13 @@ import helpers
 
 class GroupCreateHandler(webapp2.RequestHandler):
     def get(self):
-        if not helpers.get_user_email():
+        profile = socialdata.get_user_profile(helpers.get_user_email())
+        if not profile:
             self.redirect('/')
         else:
             values = helpers.get_template_parameters()
             profile = socialdata.get_user_profile(helpers.get_user_email())
+            values['name'] = profile.name
             if profile:
                 values['groups'] = profile.groups
             helpers.render_template(self, 'group-create.html', values)
@@ -42,7 +44,7 @@ class GroupSaveHandler(webapp2.RequestHandler):
             self.redirect('/')
         else:
             error_text = ''
-            name = self.request.get("name")
+            group_name = self.request.get("group_name")
             course = self.request.get("course")
             description = self.request.get("description")
             member_limit = self.request.get("member_limit")
@@ -51,14 +53,14 @@ class GroupSaveHandler(webapp2.RequestHandler):
             group_admin = helpers.get_user_email()
             school = profile.school
             groups = socialdata.get_profile_groups(helpers.get_user_email())
-            groups.append(name)
+            groups.append(group_name)
             socialdata.save_profile(profile.name, profile.email, profile.courses, profile.school, groups)
             values = helpers.get_template_parameters()
-            name.strip()
-            name.replace(" ", "&")
-            if len(name) > 20:
+            group_name.strip()
+            group_name.replace(" ", "&")
+            if len(group_name) > 20:
                 error_text += "Your name can't be more than 20 letters\n"
-            for i in name:
+            for i in group_name:
                 if i == '?':
                     error_text += "Your name can't have ' ? '\n"
                 elif i == '\\':
@@ -67,14 +69,15 @@ class GroupSaveHandler(webapp2.RequestHandler):
                     error_text += "Your name can't have ' / '\n"
                 elif i == '.':
                     error_text += "Your name can't have ' . '\n"
-            values['name'] = name
+            values['group_name'] = group_name
             values['course'] = course
             values['description'] = description
             values['member_limit'] = member_limit
+            values['name'] = profile.name
             if error_text:
                 values['errormsg'] = error_text
             else:
-                group_data.save_group(name, description, course, int(member_limit), members, group_admin, school)
+                group_data.save_group(group_name, description, course, int(member_limit), members, group_admin, school)
                 values['successmsg'] = "Everything worked out fine."
             helpers.render_template(self, 'group-edit.html', values)
 
