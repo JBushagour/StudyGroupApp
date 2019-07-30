@@ -30,3 +30,10 @@ def get_profile_by_name(name):
     for profile in results:
         return profile
     return None
+
+
+def get_profile_groups(email):
+    q = UserProfile.query(UserProfile.email == email)
+    results = q.fetch(1)
+    for profile in results:
+        return profile.groups

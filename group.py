@@ -38,6 +38,7 @@ class GroupSaveHandler(webapp2.RequestHandler):
     def post(self):
         profile = socialdata.get_user_profile(helpers.get_user_email())
         if not profile:
+            print("Fcgwogwouaougwuogwaguowagouawguoawguogouwagouwaougwaugoaw")
             self.redirect('/')
         else:
             error_text = ''
@@ -46,9 +47,12 @@ class GroupSaveHandler(webapp2.RequestHandler):
             description = self.request.get("description")
             member_limit = self.request.get("member_limit")
             members = []
-            members.append(profile)
+            members.append(helpers.get_user_email())
             group_admin = helpers.get_user_email()
             school = profile.school
+            groups = socialdata.get_profile_groups(helpers.get_user_email())
+            groups.append(name)
+            socialdata.save_profile(profile.name, profile.email, profile.courses, profile.school, groups)
             values = helpers.get_template_parameters()
             name.strip()
             name.replace(" ", "&")
