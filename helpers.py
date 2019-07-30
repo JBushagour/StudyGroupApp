@@ -22,4 +22,7 @@ def get_template_parameters():
     else:
         values['login_url'] = users.create_login_url('/')
     return values
+
+
+def clear_data():
     
