@@ -94,4 +94,15 @@ class GroupViewHandler(webapp2.RequestHandler):  #Handles /group-view, CURRENTLY
             values['members'] = group.members
             values['admin'] = group.group_admin
         helpers.render_template(self, 'group-view.html', values)
-        
+
+
+class GroupListHandler(webapp2.RequestHandler): #Handles /group-list
+    def get(self):
+        profile = socialdata.get_user_profile(helpers.get_user_email())
+        if not profile: #if the user does not have a profile, go to home
+            self.redirect('/')
+        else: #otherwise, allow them to create group
+            values = helpers.get_template_parameters()
+            values['name'] = profile.name
+            values['groups'] = profile.groups 
+            helpers.render_template(self, 'group-create.html', values) #show group creation page

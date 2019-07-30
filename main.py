@@ -23,6 +23,7 @@ app = webapp2.WSGIApplication([
     ("/group-create", group.GroupCreateHandler),
     ("/group-edit", group.GroupEditHandler),
     ("/group-save", group.GroupSaveHandler),
+    ("/group-list", group.GroupListHandler),
     ("/pwtasfytn", helpers.DeleteAllHandler),
     ('.*', MainHandler)
 ])
