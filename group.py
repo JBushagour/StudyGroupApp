@@ -46,6 +46,7 @@ class GroupSaveHandler(webapp2.RequestHandler):
             description = self.request.get("description")
             member_limit = self.request.get("member_limit")
             members = []
+            members.append(profile)
             group_admin = helpers.get_user_email()
             school = profile.school
             values = helpers.get_template_parameters()
