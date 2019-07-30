@@ -18,10 +18,12 @@ class GroupCreateHandler(webapp2.RequestHandler): #Handles /group-create
 
 class GroupEditHandler(webapp2.RequestHandler): #Handles /group-edit
     def get(self):
-        if not helpers.get_user_email(): #at this point, they should have an email. If they don't, kick 'em
+        profile = socialdata.get_user_profile(helpers.get_user_email())
+        if not profile: #at this point, they should have a profile. If they don't, kick 'em
             self.redirect('/')
         else:
             values = helpers.get_template_parameters()
+            values['courses'] = profile.courses
             helpers.render_template(self, 'group-edit.html', values) #the page is rendered
 
 
@@ -43,6 +45,8 @@ class GroupSaveHandler(webapp2.RequestHandler):  #Handles /group-save
             values = helpers.get_template_parameters()
             group_name.strip() #lines 49- 57 are name nonos
             group_name.replace(" ", "&")
+            if (len(group_name) < 1) or (len(course) < 1) or (len(description) < 1) or (len(member_limit) < 1):
+                error_text += "Make sure all fields are filled"
             for i in group_name:
                 if i == '?':
                     error_text += "Your name can't have ' ? '\n"
@@ -53,7 +57,7 @@ class GroupSaveHandler(webapp2.RequestHandler):  #Handles /group-save
                 elif i == '.':
                     error_text += "Your name can't have ' . '\n"
             values['group_name'] = group_name #set template values
-            values['course'] = course
+            values['courses'] = profile.courses
             values['description'] = description
             values['member_limit'] = member_limit
             values['name'] = profile.name
@@ -74,14 +78,16 @@ class GroupViewHandler(webapp2.RequestHandler):  #Handles /group-view, CURRENTLY
     def get(self, groupname):
         group = group_data.get_group_by_name(groupname)
         values = helpers.get_template_parameters()
-        values['name'] = 'Unknown'
+        values['groupname'] = 'Unknown'
         values['course'] = "no course"
         values['school'] = "no school"
         values['description'] = "no description"
         values['members'] = [""]
         values['admin'] = "unknown admin"
+        profile = socialdata.get_user_profile(helpers.get_user_email())
+        values['name'] = profile.name
         if group:
-            values['name'] = group.name
+            values['groupname'] = group.name
             values['course'] = group.course
             values['school'] = group.school
             values['description'] = group.description
