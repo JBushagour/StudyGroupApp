@@ -35,7 +35,7 @@ class GroupSaveHandler(webapp2.RequestHandler):  #Handles /group-save
             group_name = self.request.get("group_name")
             course = self.request.get("course")
             description = self.request.get("description")
-            member_limit = self.request.get("member_limit") #lines 35 - 42 set default values in group
+            member_limit = self.request.get("quantity") #lines 35 - 42 set default values in group
             members = []
             members.append(helpers.get_user_email())
             group_admin = helpers.get_user_email()
@@ -75,7 +75,7 @@ class GroupViewHandler(webapp2.RequestHandler):  #Handles /group-view, CURRENTLY
         profile = socialdata.get_profile_by_name(profilename)
         values = helpers.get_template_parameters()
         values['name'] = 'Unknown'
-        values['courses'] = "courses does not exist"
+        values['courses'] = ["courses does not exist", ""]
         values['school'] = "school does not exist"
         if profile:
             values['name'] = profile.name

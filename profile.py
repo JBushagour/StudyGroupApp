@@ -65,7 +65,7 @@ class ProfileViewHandler(webapp2.RequestHandler):
         profile = socialdata.get_profile_by_name(profilename)
         values = helpers.get_template_parameters()
         values['name'] = 'Unknown'
-        values['courses'] = "courses does not exist"
+        values['courses'] = ["courses does not exist"]
         values['school'] = "school does not exist"
         if profile:
             values['name'] = profile.name
