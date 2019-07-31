@@ -4,6 +4,7 @@ from google.appengine.api import users
 from google.appengine.ext.webapp import template
 from UserProfile_model import UserProfile
 from group_model import Group
+from membership_model import Membership
 
 
 def render_template(handler, file_name, template_values):
@@ -36,3 +37,6 @@ class DeleteAllHandler(webapp2.RequestHandler): #Handles /pwtasfytn
         g = Group.query().fetch()
         for group in g:
             group.key.delete()
+        m = Membership.query().fetch()
+        for membership in m:
+            membership.key.delete()

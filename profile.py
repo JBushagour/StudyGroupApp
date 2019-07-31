@@ -51,11 +51,10 @@ class ProfileSaveHandler(webapp2.RequestHandler):
                 course = self.request.get("classes" + str(coursenum))
             values['courses'] = coursesList
             values['school'] = school
-            groups = "NOCHANGE" #default group text, allows groups to not restart
             if error_text:
                 values['errormsg'] = error_text
             else:
-                socialdata.save_profile(name, email, coursesList, school, groups)  # save profile if everything is fine
+                socialdata.save_profile(name, email, coursesList, school)  # save profile if everything is fine
                 values['successmsg'] = "Everything worked out fine."
             helpers.render_template(self, 'profile-edit.html', values) #show page
 
@@ -67,10 +66,8 @@ class ProfileViewHandler(webapp2.RequestHandler):  #handles profile-view
         values['name'] = 'Unknown' #if the profile doens't exist we popoulate the spaces with defaults
         values['courses'] = ["courses does not exist"]
         values['school'] = "school does not exist"
-        values['groups'] = ["User is not in any grops"]
         if profile:  # if we have a profile, populate the spaces with correct info
             values['name'] = profile.name
             values['courses'] = profile.courses
             values['school'] = profile.school
-            values['groups'] = profile.groups
         helpers.render_template(self, 'profile-view.html', values) #show page
