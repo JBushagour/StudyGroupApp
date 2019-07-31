@@ -2,6 +2,8 @@ body{
     font-family: Helvetica, sans-serif;
     font-size: 12pt;
     background-color: white;
+    min-width:900px;        /* Suppose you want minimum width of 1000px */
+
 }
 
 a{
@@ -10,10 +12,7 @@ a{
 
 a:hover{
     text-decoration: none;
-}
-
-#topmenu{
-    padding-bottom: 10px;
+    background-color: #72DFE5
 }
 
 #successmsg {
@@ -30,13 +29,14 @@ a:hover{
 .dropdown {
   position: relative;
   display: inline-block;
+  
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: black;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -45,16 +45,59 @@ a:hover{
 /* Links inside the dropdown */
 .dropdown-content a {
   color: black;
-  padding: 12px 16px;
   text-decoration: none;
-  display: block;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {background-color: #72DFE5;}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #7fc4df;}
+.dropdown:hover .dropbtn {background-color:black;}
+
+#topmenu{
+  list-style-type: none;
+  overflow: visible;
+  background-color: black;
+  font-family: sans-serif;
+  color: white;
+  text-align: left;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 600;
+  height: 58px;
+}
+
+#topmenu a{
+  float: left;
+  font-size: 24px;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;    
+}
+
+.dropdown .dropbtn {
+      padding: 14px 16px;
+  font-size: 24px;  
+  border: none;
+  outline: none;
+  color: white;
+  background-color: inherit;
+  font-family: inherit;
+  font-weight: 600;
+}
+
+.studigroup{
+float: right;
+padding-top: 14px;
+padding-right: 15px;
+}
+
+#logo{
+    height: 45px;
+    width: auto;
+    padding-top: 6;
+}

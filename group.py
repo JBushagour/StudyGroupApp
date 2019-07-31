@@ -104,5 +104,5 @@ class GroupListHandler(webapp2.RequestHandler): #Handles /group-list
         else: #otherwise, allow them to create group
             values = helpers.get_template_parameters()
             values['name'] = profile.name
-            values['groups'] = profile.groups 
+            values['groups'] = profile.groups
             helpers.render_template(self, 'group-create.html', values) #show group creation page

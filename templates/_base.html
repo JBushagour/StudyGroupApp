@@ -1,6 +1,6 @@
 <html>
     <head>
-        <link rel="stylesheet" href="/i/style.css">
+         <link rel="stylesheet" href="/i/style.css">  
     </head>
     <body>
         <div id="topmenu">
@@ -13,7 +13,7 @@
             <a href="/p/{{name}}">View Profile</a>
             <!––Dropdown for group-->
             <div class="dropdown">
-                <button class="dropbtn">Groups</button>
+                <button class="dropbtn">Groups ▼</button>
                 <div class="dropdown-content">
                     <!––Links included in group dropdown-->
                     <a href="/group-list">List groups</a>
@@ -21,6 +21,8 @@
                     </div>
                 </div>
             {% endif %}
+            <div class="studigroup"> StudiGroup </div>
+            <img class="studigroup" id="logo" src="https://i.ibb.co/SXMrttq/book.png" alt="book" border="0">
         </div>
         {% if successmsg %}
         <div id="successmsg"> {{successmsg|linebreaks}}</div>
