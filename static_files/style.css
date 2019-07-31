@@ -1,7 +1,7 @@
 body{
     font-family: Helvetica, sans-serif;
     font-size: 12pt;
-    background-color: #EBEDDF;
+    background-color: white;
     min-width:900px;        /* Suppose you want minimum width of 1000px */
 
 }
