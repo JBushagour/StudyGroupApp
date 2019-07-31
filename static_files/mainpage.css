@@ -1,0 +1,23 @@
+#splashtext{
+    font-size: 36pt;
+    font-weight: 600;
+    text-align: center;
+    color: #3D3548;
+    margin-top: 100px;
+}
+
+.steps{
+    display:flex;
+    justify-content: space-evenly;
+    font-size: 24pt;
+    font-weight: 600;
+    color: #D45D89;
+}
+.vertbox{
+    height: 100%;
+    display:flex;
+    
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
