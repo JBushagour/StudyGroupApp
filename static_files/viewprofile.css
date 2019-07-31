@@ -39,6 +39,7 @@ h1 {
   margin-left: auto;
   margin-right: auto;
   font-family: sans-serif;
+  margin-top: 38px;
 
 }
 form  {
@@ -56,4 +57,12 @@ form  {
     margin-left: 1230px;
     height: 45px;
     width: 55px;
+}
+
+.information{
+    font-size: 15pt;
+}
+
+legend {
+    font-size: 15pt;
 }

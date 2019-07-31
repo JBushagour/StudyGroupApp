@@ -57,3 +57,7 @@ form  {
     height: 45px;
     width: 55px;
 }
+
+legend {
+    font-size: 15pt;
+}

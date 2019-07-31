@@ -67,8 +67,10 @@ class ProfileViewHandler(webapp2.RequestHandler):  #handles profile-view
         values['name'] = 'Unknown' #if the profile doens't exist we popoulate the spaces with defaults
         values['courses'] = ["courses does not exist"]
         values['school'] = "school does not exist"
+        values['groups'] = ["User is not in any grops"]
         if profile:  # if we have a profile, populate the spaces with correct info
             values['name'] = profile.name
             values['courses'] = profile.courses
             values['school'] = profile.school
+            values['groups'] = profile.groups
         helpers.render_template(self, 'profile-view.html', values) #show page
