@@ -6,6 +6,5 @@ class Group(ndb.Model):
     description = ndb.StringProperty()
     course = ndb.StringProperty(required=True)
     member_limit = ndb.IntegerProperty()
-    members = ndb.StringProperty(repeated=True)
     group_admin = ndb.StringProperty(required=True)
     school = ndb.StringProperty(required=True)

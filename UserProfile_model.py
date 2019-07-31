@@ -6,4 +6,3 @@ class UserProfile(ndb.Model):
     email = ndb.StringProperty(required=True)
     courses = ndb.StringProperty(repeated=True)
     school = ndb.StringProperty(required=True)
-    groups = ndb.StringProperty(repeated=True)

@@ -2,6 +2,7 @@ import webapp2
 import group_data
 import socialdata
 import helpers
+import membership_data
 
 
 class GroupCreateHandler(webapp2.RequestHandler): #Handles /group-create
@@ -12,7 +13,7 @@ class GroupCreateHandler(webapp2.RequestHandler): #Handles /group-create
         else: #otherwise, allow them to create group
             values = helpers.get_template_parameters()
             values['name'] = profile.name
-            values['groups'] = profile.groups 
+            values["groups"] = membership_data.get_groups_from_member(helpers.get_user_email())
             helpers.render_template(self, 'group-create.html', values) #show group creation page
 
 
@@ -38,8 +39,6 @@ class GroupSaveHandler(webapp2.RequestHandler):  #Handles /group-save
             course = self.request.get("course")
             description = self.request.get("description")
             member_limit = self.request.get("quantity") #lines 35 - 42 set default values in group
-            members = []
-            members.append(helpers.get_user_email())
             group_admin = helpers.get_user_email()
             school = profile.school
             values = helpers.get_template_parameters()
@@ -66,10 +65,8 @@ class GroupSaveHandler(webapp2.RequestHandler):  #Handles /group-save
             if error_text: #print error text if there's a problem
                 values['errormsg'] = error_text
             else:
-                groups = socialdata.get_profile_groups(helpers.get_user_email()) #we get a list of the users previous groups
-                groups.append(group_name) #we add this group on to it
-                socialdata.save_profile(profile.name, profile.email, profile.courses, profile.school, groups) #save the profile with the change to the groups
-                group_data.save_group(group_name, description, course, int(member_limit), members, group_admin, school) #print success message if no problem saving
+                membership_data.save_membership(helpers.get_user_email(), group_name)
+                group_data.save_group(group_name, description, course, int(member_limit), group_admin, school) #print success message if no problem saving
                 values['successmsg'] = "Everything worked out fine."
             helpers.render_template(self, 'group-edit.html', values) #go back to edit render
 
@@ -82,8 +79,8 @@ class GroupViewHandler(webapp2.RequestHandler):  #Handles /group-view, CURRENTLY
         values['course'] = "no course"
         values['school'] = "no school"
         values['description'] = "no description"
-        values['members'] = [""]
         values['admin'] = "unknown admin"
+        values["members"] = "unkown members"
         profile = socialdata.get_user_profile(helpers.get_user_email())
         values['name'] = profile.name
         if group:
@@ -91,9 +88,9 @@ class GroupViewHandler(webapp2.RequestHandler):  #Handles /group-view, CURRENTLY
             values['course'] = group.course
             values['school'] = group.school
             values['description'] = group.description
-            values['members'] = group.members
             values['admin'] = group.group_admin
-        helpers.render_template(self, 'group-view.html', values)
+            values["members"] = membership_data.get_members_from_group(groupname)
+            helpers.render_template(self, 'group-view.html', values)
 
 
 class GroupListHandler(webapp2.RequestHandler): #Handles /group-list
@@ -102,7 +99,46 @@ class GroupListHandler(webapp2.RequestHandler): #Handles /group-list
         if not profile: #if the user does not have a profile, go to home
             self.redirect('/')
         else: #otherwise, allow them to create group
+            errorText = ''
             values = helpers.get_template_parameters()
+            groups = group_data.get_groups_by_courses(profile.courses)
+            listOfGroupNames = []
+            for group in groups:
+                membersList = membership_data.get_members_from_group(group.name)
+                if ((group.member_limit) - len(membersList) + 1) < 1:
+                    errorText += "The member limit has been reached"
+                elif profile.email in membersList:
+                    errorText += "You are already in this group"
+                else:
+                    listOfGroupNames.append(group.name)
             values['name'] = profile.name
-            values['groups'] = profile.groups
-            helpers.render_template(self, 'group-create.html', values) #show group creation page
+            values['groups'] = listOfGroupNames
+            helpers.render_template(self, 'group-list.html', values) #show group creation page
+
+
+class GroupJoinHandler(webapp2.RequestHandler): #Handles /group-join
+    def get(self, groupname):
+        profile = socialdata.get_user_profile(helpers.get_user_email())
+        if not profile: #if the user does not have a profile, go to home
+            self.redirect('/')
+        else: #otherwise, allow them to create group
+            errorText = ""
+            values = helpers.get_template_parameters()
+            groups = group_data.get_groups_by_courses(profile.courses)
+            listOfGroupNames = []
+            membersList = membership_data.get_members_from_group(groupname)
+            for group in groups:
+                if ((group.member_limit) - len(membersList) + 1) < 1:
+                    errorText += "The member limit has been reached"
+                elif profile.email in membersList:
+                    errorText += "You are already in this group"
+                else:
+                    listOfGroupNames.append(group.name)
+            values['name'] = profile.name
+            values['groups'] = listOfGroupNames
+            if errorText:
+                values['errormsg'] = errorText
+            else:
+                membership_data.save_membership(helpers.get_user_email(), groupname)
+                values['successmsg'] = "Everything worked out fine."
+            helpers.render_template(self, 'group-list.html', values) #show group creation page
