@@ -3,7 +3,6 @@ import group_data
 import socialdata
 import helpers
 import membership_data
-import members
 
 
 class GroupCreateHandler(webapp2.RequestHandler): #Handles /group-create
