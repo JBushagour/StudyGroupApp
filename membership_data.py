@@ -27,10 +27,6 @@ def delete_membership(email, groupname):
     for membership in m:
         if membership.email == email:
             membership.key.delete()
-    g = Group.query(Group.name == groupname).fetch(1)
-    for group in g:
-        group.key.delete()
-
 
 def delete_all_membership( groupname):
     m = Membership.query(Membership.groupname == groupname).fetch()
