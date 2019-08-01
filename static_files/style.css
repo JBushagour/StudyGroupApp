@@ -1,0 +1,135 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: #72DFE5;
+  background-color: black;
+  font-family: sans-serif;
+}
+
+li {
+  float: left;
+  font-family: sans-serif;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+  font-size: 24px;
+  font-family: sans-serif;
+}
+
+li a:hover {
+  background-color: #72DFE5;
+  width: 200px;
+}
+
+body{
+    font-family: Helvetica, sans-serif;
+    font-size: 12pt;
+    background-color: white;
+    min-width:900px;        /* Suppose you want minimum width of 1000px */
+
+}
+
+a{
+    text-decoration: underline;
+}
+
+a:hover{
+    text-decoration: none;
+    background-color: #72DFE5
+}
+
+#successmsg {
+    font-weight: bold;
+    color: blue;
+    position: absolute;
+}
+
+#errormsg {
+    font-weight: bold;
+    color: red;
+    position: absolute;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  text-decoration: none;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #72DFE5;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color:black;}
+
+#topmenu{
+  list-style-type: none;
+  overflow: visible;
+  background-color: black;
+  font-family: sans-serif;
+  color: white;
+  text-align: left;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 600;
+  height: 58px;
+}
+
+#topmenu a{
+  float: left;
+  font-size: 24px;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;    
+}
+
+.dropdown .dropbtn {
+      padding: 14px 16px;
+  font-size: 24px;  
+  border: none;
+  outline: none;
+  color: white;
+  background-color: inherit;
+  font-family: inherit;
+  font-weight: 600;
+}
+
+.studigroup{
+float: right;
+padding-top: 14px;
+padding-right: 15px;
+}
+
+#logo{
+    height: 45px;
+    width: auto;
+    padding-top: 6;
+}
+
