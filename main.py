@@ -18,6 +18,8 @@ class MainHandler(webapp2.RequestHandler): #handles the main page
 app = webapp2.WSGIApplication([
     ('/p/(.*)', profile.ProfileViewHandler),
     ('/g/join/(.*)', group.GroupJoinHandler),
+    ('/g/delete/(.*)', group.GroupDeleteHandler),
+    ('/g/leave/(.*)', group.GroupLeaveHandler),
     ('/g/(.*)', group.GroupViewHandler),
     ("/profile-edit", profile.ProfileEditHandler),
     ("/profile-save", profile.ProfileSaveHandler),

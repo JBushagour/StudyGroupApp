@@ -26,6 +26,7 @@ li a:hover {
   background-color: #72DFE5;
   width: 200px;
 }
+
 body{
     font-family: Helvetica, sans-serif;
     font-size: 12pt;
@@ -44,8 +45,8 @@ a:hover{
 }
 
 #successmsg {
-    font-weight: normal;
-    color: green;
+    font-weight: bold;
+    color: blue;
     position: absolute;
 }
 
@@ -61,40 +62,31 @@ a:hover{
   display: inline-block;
   
 }
-.drop {
-  position: relative;
-  display: inline-block;
-  
-}
 
 /* Dropdown Content (Hidden by Default) */
-.dropdown-content, .profile-drop {
+.dropdown-content {
   display: none;
   position: absolute;
   background-color: black;
-  min-width: 140px;
+  min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
 
 /* Links inside the dropdown */
-.dropdown-content a, .profile-drop a {
+.dropdown-content a {
   color: black;
   text-decoration: none;
 }
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #72DFE5;}
-.profile-drop a:hover {background-color: #72DFE5;}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
-.drop:hover .profile-drop {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color:#72DFE5;}
-
-.drop:hover .profdrop {background-color: #72DFE5;}
+.dropdown:hover .dropbtn {background-color:black;}
 
 #topmenu{
   list-style-type: none;
@@ -109,7 +101,7 @@ a:hover{
   height: 58px;
 }
 
-#topmenu a {
+#topmenu a{
   float: left;
   font-size: 24px;
   color: white;
@@ -128,28 +120,16 @@ a:hover{
   font-family: inherit;
   font-weight: 600;
 }
-.drop .profdrop {
-  padding: 14px 16px;
-  font-size: 24px;  
-  border: none;
-  outline: none;
-  color: white;
-  background-color: inherit;
-  font-family: inherit;
-  font-weight: 600;
-}
 
 .studigroup{
 float: right;
 padding-top: 14px;
-padding-left: 415px;
+padding-right: 15px;
 }
 
 #logo{
-    float: right;
     height: 45px;
     width: auto;
     padding-top: 6;
-    padding-left: 400px;
 }
 

@@ -13,7 +13,10 @@ class GroupCreateHandler(webapp2.RequestHandler): #Handles /group-create
         else: #otherwise, allow them to create group
             values = helpers.get_template_parameters()
             values['name'] = profile.name
-            values["groups"] = membership_data.get_groups_from_member(helpers.get_user_email())
+            listOfNames = []
+            for group in group_data.get_admin_groups(profile.email):
+                listOfNames.append(group.name)
+            values["groups"] = listOfNames
             helpers.render_template(self, 'group-create.html', values) #show group creation page
 
 
@@ -111,8 +114,15 @@ class GroupListHandler(webapp2.RequestHandler): #Handles /group-list
                     errorText += "You are already in this group"
                 else:
                     listOfGroupNames.append(group.name)
+            listOfInGroups = membership_data.get_groups_from_member(profile.email)
+            listOfInGroupsNoAdmin= []
+            if len(listOfInGroups) > 0:
+                for group in listOfInGroups:
+                    if group_data.get_group_by_name(group).group_admin != profile.email:
+                        listOfInGroupsNoAdmin.append(group)
             values['name'] = profile.name
             values['groups'] = listOfGroupNames
+            values["ingroups"] = listOfInGroupsNoAdmin
             helpers.render_template(self, 'group-list.html', values) #show group creation page
 
 
@@ -140,5 +150,33 @@ class GroupJoinHandler(webapp2.RequestHandler): #Handles /group-join
                 values['errormsg'] = errorText
             else:
                 membership_data.save_membership(helpers.get_user_email(), groupname)
+                self.redirect("/group-list")
                 values['successmsg'] = "Everything worked out fine."
             helpers.render_template(self, 'group-list.html', values) #show group creation page
+
+
+class GroupDeleteHandler(webapp2.RequestHandler): #Handles /group-delete
+    def get(self, groupname):
+        profile = socialdata.get_user_profile(helpers.get_user_email())
+        if not (profile.email == group_data.get_group_by_name(groupname).group_admin): #if the user does not have a profile, go to home
+            self.redirect('/')
+        else:
+            membership_data.delete_all_membership(profile.email, groupname)
+            values = helpers.get_template_parameters()
+            values['name'] = profile.name
+            listOfNames = []
+            for group in group_data.get_admin_groups(profile.email):
+                listOfNames.append(group.name)
+            values["groups"] = listOfNames
+            helpers.render_template(self, 'group-create.html', values) #show group creation page
+
+
+class GroupLeaveHandler(webapp2.RequestHandler):
+    def get(self, groupname):
+        profile = socialdata.get_user_profile(helpers.get_user_email())
+        if not profile: #if the user does not have a profile, go to home
+            self.redirect('/')
+        else:
+            membership_data.delete_membership(profile.email, groupname)
+            self.redirect('/group-list')
+

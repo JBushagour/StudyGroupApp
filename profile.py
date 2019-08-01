@@ -1,6 +1,7 @@
 import webapp2
 import socialdata
 import helpers
+import membership_data
 
 
 class ProfileEditHandler(webapp2.RequestHandler): #Handles /profile-edit
@@ -55,7 +56,7 @@ class ProfileSaveHandler(webapp2.RequestHandler):
                 values['errormsg'] = error_text
             else:
                 socialdata.save_profile(name, email, coursesList, school)  # save profile if everything is fine
-                values['successmsg'] = "Success!"
+                values['successmsg'] = "Everything worked out fine."
             helpers.render_template(self, 'profile-edit.html', values) #show page
 
 
@@ -66,8 +67,10 @@ class ProfileViewHandler(webapp2.RequestHandler):  #handles profile-view
         values['name'] = 'Unknown' #if the profile doens't exist we popoulate the spaces with defaults
         values['courses'] = ["courses does not exist"]
         values['school'] = "school does not exist"
+        values["groups"] = ["Groups do not exist"]
         if profile:  # if we have a profile, populate the spaces with correct info
             values['name'] = profile.name
             values['courses'] = profile.courses
             values['school'] = profile.school
+            values["groups"] = membership_data.get_groups_from_member(profile.email)
         helpers.render_template(self, 'profile-view.html', values) #show page
