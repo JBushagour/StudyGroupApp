@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/i/viewgroup.css">  
+    <h1><center><i> Group Information </i></center></h1> 
+<fieldset>
+    <legend>Current group information:</legend>
+    <div class="information">
+        <b>NAME: <b> {{groupname}}
+        <br><br>
+        <b>SCHOOL: <b> {{school}}
+        <br><br>
+        <b> COURSE: </b> {{course}}
+        <br><br>
+        <b> DESCRIPTION: </b> {{description|linebreaks}}
+        <br><br>
+        <b> ADMIN: </b> {{admin}}
+        <br><br>
+        <b> MEMBERS: </b> <br>
+        {% for member in members %}
+        {{member}}
+        <br>
+        {% endfor %}
+    </div>
+</fieldset>
+{% endblock %}
