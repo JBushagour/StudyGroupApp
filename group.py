@@ -45,9 +45,7 @@ class GroupSaveHandler(webapp2.RequestHandler):  #Handles /group-save
 
             meet = self.request.get("meet")
             time = self.request.get("time")
-            print("***********")
-            print(meet)
-            print(time)
+
 
             school = profile.school
             values = helpers.get_template_parameters()
@@ -82,7 +80,7 @@ class GroupSaveHandler(webapp2.RequestHandler):  #Handles /group-save
             else:
                 membership_data.save_membership(helpers.get_user_email(), group_name)
                 group_data.save_group(group_name, description, course, int(member_limit), group_admin, school, meet, time) #print success message if no problem saving
-                values['successmsg'] = "Everything worked out fine."
+                values['successmsg'] = "Success!"
             helpers.render_template(self, 'group-edit.html', values) #go back to edit render
 
 
@@ -123,9 +121,9 @@ class GroupListHandler(webapp2.RequestHandler): #Handles /group-list
             for group in groups:
                 membersList = membership_data.get_members_from_group(group.name)
                 if ((group.member_limit) - len(membersList) + 1) < 1:
-                    errorText += "The member limit has been reached"
+                    errorText += "The member limit has been reached."
                 elif profile.email in membersList:
-                    errorText += "You are already in this group"
+                    errorText += "You are already in this group."
                 else:
                     listOfGroupNames.append(group.name)
             listOfInGroups = membership_data.get_groups_from_member(profile.email)
@@ -153,9 +151,9 @@ class GroupJoinHandler(webapp2.RequestHandler): #Handles /group-join
             membersList = membership_data.get_members_from_group(groupname)
             for group in groups:
                 if ((group.member_limit) - len(membersList) + 1) < 1:
-                    errorText += "The member limit has been reached"
+                    errorText += "The member limit has been reached."
                 elif profile.email in membersList:
-                    errorText += "You are already in this group"
+                    errorText += "You are already in this group."
                 else:
                     listOfGroupNames.append(group.name)
             values['name'] = profile.name
@@ -193,4 +191,3 @@ class GroupLeaveHandler(webapp2.RequestHandler):
         else:
             membership_data.delete_membership(profile.email, groupname)
             self.redirect('/group-list')
-

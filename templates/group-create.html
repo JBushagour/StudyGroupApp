@@ -1,11 +1,15 @@
 {% extends "_base.html" %}
 {% block content %}
-    <br><b>Groups You've Created</b><br>
+<link rel="stylesheet" type="text/css" href="/i/creategroup.css">
+    <h1><i>Create a Group<br>Active Groups</h1></i>
+    <!--<br><b>Groups You've Created</b><br>-->
     {% for group in groups %}
-    <a href="/g/{{group}}">{{group}}</a>
-    <a href="/g/delete/{{group}}" id="delete_button">Delete Group</a>    
+    <a href="/g/{{group}}">{{group}}</a><br> 
+    <a href="/g/delete/{{group}}"><input type="button" value="Delete Group" />
+    </a>
     <br>
     {% endfor %}
     <br><br>
-    <a href="/group-edit" id="edit_button">Create Group</a>
+   <a href="/group-edit"><input type="button" value="Create Group" />
+</a>
 {% endblock %}

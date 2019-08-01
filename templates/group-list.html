@@ -1,16 +1,45 @@
 {% extends "_base.html" %}
 {% block content %}
-<link rel="stylesheet" type="text/css" href="/currentgroups">
-<br><br><br>
-    <br><b>Your Groups</b><br>
-    {% for ingroup in ingroups %}
-    <a href="/g/{{ingroup}}">{{ingroup}}  </a>
-    <a href="/g/leave/{{ingroup}}"><br> Leave Group </a>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/i/currentgroups.css"
+    </head>
+
+    <h1><i>Active Groups</h1></i>
+
+<form>
+    <form method="post" action="/view-group">
+ <fieldset>
+     <legend><b>YOU ARE THE ADMIN OF:</b></legend>
+    {% for group in groups %}
+    <a href="/g/{{group}}">{{group}}</a>
+    <a href="/g/delete/{{group}}" id="delete_button">Delete Group</a>    
     <br>
     {% endfor %}
-    <br><b>Groups You Can Join </b><br>
-    {% for group in groups %}
-    <a href="/g/{{group}}">{{group}}  </a> <div>          </div> <a href="/g/join/{{group}}"> join this group </a>
-    <br><br><br>
+    <br><br>
+    <a href="/group-edit" id="edit_button">Create Group</a>
+{% endblock %}  
+     
+     <hr size="2" color="#72DFE5">
+ </fieldset>
+</form>
+    
+   {% for group in groups %}
+    <a href="/g/{{group}}">{{group}}</a>
+    <a href="/g/delete/{{group}}" id="delete_button">Delete Group</a>    
+    <br>
     {% endfor %}
+    <br><br>
+    <a href="/group-edit" id="edit_button">Create Group</a>
+{% endblock %}      
+        
+     
+     <hr size="2" color="#72DFE5">
+ </fieldset>
+</form>
+ 
+    
+
+    </html>
 {% endblock %}
