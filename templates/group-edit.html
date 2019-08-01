@@ -2,12 +2,13 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="/i/creategroup.css">
 
+
 <h1><center><i> Create a Group </i></center></h1>
 <fieldset>
     <legend>Be sure to fill out all boxes with relevant information.</legend>
     <form method="post" action="/group-save">
         <b>NAME:</b><br>
-        <input type="text" name="group_name" value="{{group_name}}" maxlength="40"><br><br>
+        <input type="text" name="group_name" maxlength="40"><br><br>
         <b>COURSE:</b><br>
         <select name="course">
             {% for course in courses %}
@@ -18,9 +19,23 @@
         <br><br>
         <b>DESCRIPTION:</b><br>
         <textarea name="description" rows="10" maxlength="300">{{description}}</textarea><br><br>
+<<<<<<< HEAD
+        <br><b><label for="start">MEETING DATE:</label></b>
+
+<input type="date" id="start" name="date" min="08/01/2019" max="07/01/2020">
+
+        <label for="time"><b>MEETING TIME:</b></label>
+
+<input type="time" id="appt" name="meettime"
+       min="0:00" max="24:00" required><br>
+        
+        <br><b>MEMBER LIMIT:</b><br>
+=======
         <b>MEMBER LIMIT:</b><br>
+>>>>>>> 69f8f2ec62fb02aba523b6076ec1176c4d8301f6
         <input type="number" name="quantity" min="2" max="20" value="{{member_limit}}"><br><br>
         <input type="submit">
     </form>
 </fieldset>
+
 {% endblock %}

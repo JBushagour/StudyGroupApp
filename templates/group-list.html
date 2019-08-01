@@ -1,9 +1,10 @@
 {% extends "_base.html" %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="/i/viewgroup.css">
 <br><br><br>
     <br><b>Groups you can join: </b><br>
     {% for group in groups %}
-    <a href="/g/{{group}}">{{group}}  </a> <div>          </div> <a href="/g/join/{{group}}"> join this group </a>
+    <a href="/g/{{group}}">{{group}}  </a> <div>          </div> <a href="/g/join/{{group}}"> Join Group </a>
     <br><br><br>
-    {% endfor %}
+   {% endfor %}
 {% endblock %}
