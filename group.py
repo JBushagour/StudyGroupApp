@@ -161,7 +161,7 @@ class GroupDeleteHandler(webapp2.RequestHandler): #Handles /group-delete
         if not (profile.email == group_data.get_group_by_name(groupname).group_admin): #if the user does not have a profile, go to home
             self.redirect('/')
         else:
-            membership_data.delete_all_membership(profile.email, groupname)
+            membership_data.delete_all_membership(groupname)
             values = helpers.get_template_parameters()
             values['name'] = profile.name
             listOfNames = []
