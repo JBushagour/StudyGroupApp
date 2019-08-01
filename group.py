@@ -13,7 +13,11 @@ class GroupCreateHandler(webapp2.RequestHandler): #Handles /group-create
         else: #otherwise, allow them to create group
             values = helpers.get_template_parameters()
             values['name'] = profile.name
-            values["groups"] = membership_data.get_groups_from_member(helpers.get_user_email())
+            groups = group_data.get_admin_groups(profile.email)
+            groupNames = []
+            for group in groups:
+                groupNames.append(group.name)
+            values["groups"] = groupNames
             helpers.render_template(self, 'group-create.html', values) #show group creation page
 
 
@@ -141,4 +145,5 @@ class GroupJoinHandler(webapp2.RequestHandler): #Handles /group-join
             else:
                 membership_data.save_membership(helpers.get_user_email(), groupname)
                 values['successmsg'] = "Everything worked out fine."
+                self.redirect("/group-list")
             helpers.render_template(self, 'group-list.html', values) #show group creation page

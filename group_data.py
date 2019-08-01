@@ -42,3 +42,11 @@ def get_groups_by_courses(courseList): # simple function to return group object 
         for group in results:
             listOfGroups.append(group)
     return listOfGroups
+
+
+def get_admin_groups(email): # simple function to return group object given admin email
+    q = Group.query(Group.group_admin == email).fetch()
+    listOfGroups = []
+    for group in q:
+        listOfGroups.append(group)
+    return listOfGroups
