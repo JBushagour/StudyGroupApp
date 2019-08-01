@@ -16,11 +16,11 @@
             {% endfor %}
         </select>
         <br><br>
-        <b>DESCRIPTION:</b><br>
+        <b>DESCRIPTION:<br> (where will you meet)</b><br>
         <textarea name="description" rows="10" maxlength="300">{{description}}</textarea><br><br>
         <label for="start"><b>MEETING DATE:</b></label><br><input type="date" id="start" name="meet" value="{{meeting_date}}"><br>
 
-        <br><label for="time"><b>MEETING TIME:</b></label><br><input type="time" id="time" name="time" value="{{meeting_time}}" min=0:00 max=12:00><br>
+        <br><label for="time"><b>MEETING TIME:</b></label><br><input type="time" id="time" name="time" value="{{meeting_time}}" min=12:00 max=24:00><br>
         <br><b>MEMBER LIMIT:</b><br>
         <input type="number" name="quantity" min="2" max="20" value="{{member_limit}}"><br><br>
         <input type="submit">
