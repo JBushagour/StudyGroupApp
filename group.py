@@ -116,6 +116,7 @@ class GroupListHandler(webapp2.RequestHandler): #Handles /group-list
                     listOfGroupNames.append(group.name)
             values['name'] = profile.name
             values['groups'] = listOfGroupNames
+            values["ingroups"] = membership_data.get_groups_from_member(profile.email)
             helpers.render_template(self, 'group-list.html', values) #show group creation page
 
 
@@ -146,3 +147,19 @@ class GroupJoinHandler(webapp2.RequestHandler): #Handles /group-join
                 self.redirect("/group-list")
                 values['successmsg'] = "Everything worked out fine."
             helpers.render_template(self, 'group-list.html', values) #show group creation page
+
+
+class GroupDeleteHandler(webapp2.RequestHandler): #Handles /group-delete
+    def get(self, groupname):
+        profile = socialdata.get_user_profile(helpers.get_user_email())
+        if not (profile.email == group_data.get_group_by_name(groupname).group_admin): #if the user does not have a profile, go to home
+            self.redirect('/')
+        else:
+            membership_data.delete_membership(profile.email, groupname)
+            values = helpers.get_template_parameters()
+            values['name'] = profile.name
+            listOfNames = []
+            for group in group_data.get_admin_groups(profile.email):
+                listOfNames.append(group.name)
+            values["groups"] = listOfNames
+            helpers.render_template(self, 'group-create.html', values) #show group creation page

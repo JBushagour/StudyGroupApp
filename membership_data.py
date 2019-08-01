@@ -1,4 +1,5 @@
 from membership_model import Membership
+from group_model import Group
 
 def save_membership(email, groupname): # Saves profile
     m = Membership(email=email, groupname=groupname)
@@ -19,3 +20,13 @@ def get_members_from_group(groupname):
     for member in members:
         memberemails.append(member.email)
     return memberemails
+
+
+def delete_membership(email, groupname):
+    m = Membership.query(Membership.groupname == groupname).fetch()
+    for membership in m:
+        if membership.email == email:
+            membership.key.delete()
+    g = Group.query(Group.name == groupname).fetch(1)
+    for group in g:
+        group.key.delete()
