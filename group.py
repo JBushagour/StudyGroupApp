@@ -45,7 +45,7 @@ class GroupSaveHandler(webapp2.RequestHandler):  #Handles /group-save
             group_name.strip() #lines 49- 57 are name nonos
             group_name.replace(" ", "&")
             if (len(group_name) < 1) or (len(course) < 1) or (len(description) < 1) or (len(member_limit) < 1):
-                error_text += "Make sure all fields are completed."
+                error_text += "Make sure all fields are filled"
             for i in group_name:
                 if i == '?':
                     error_text += "Your name can't have ' ? '\n"
@@ -61,17 +61,10 @@ class GroupSaveHandler(webapp2.RequestHandler):  #Handles /group-save
             values['member_limit'] = member_limit
             values['name'] = profile.name
             if group_data.get_group_by_name(group_name):
-                error_text += "This group name is taken. Try again."
+                error_text += "This group name is already taken"
             if error_text: #print error text if there's a problem
                 values['errormsg'] = error_text
             else:
-
-                groups = socialdata.get_profile_groups(helpers.get_user_email()) #we get a list of the users previous groups
-                groups.append(group_name) #we add this group on to it
-                socialdata.save_profile(profile.name, profile.email, profile.courses, profile.school, groups) #save the profile with the change to the groups
-                group_data.save_group(group_name, description, course, int(member_limit), members, group_admin, school) #print success message if no problem saving
-                values['successmsg'] = "Success!"
-
                 membership_data.save_membership(helpers.get_user_email(), group_name)
                 group_data.save_group(group_name, description, course, int(member_limit), group_admin, school) #print success message if no problem saving
                 values['successmsg'] = "Everything worked out fine."
@@ -82,21 +75,12 @@ class GroupViewHandler(webapp2.RequestHandler):  #Handles /group-view, CURRENTLY
     def get(self, groupname):
         group = group_data.get_group_by_name(groupname)
         values = helpers.get_template_parameters()
-
-        values['groupname'] = 'Group Name Unknown'
-        values['course'] = "Course Not Listed"
-        values['school'] = "School Not Listed"
-        values['description'] = "Description Unknown"
-        values['members'] = [""]
-        values['admin'] = "Admin Unknown"
-
         values['groupname'] = 'Unknown'
         values['course'] = "no course"
         values['school'] = "no school"
         values['description'] = "no description"
         values['admin'] = "unknown admin"
-        values["members"] = "unknown members"
-
+        values["members"] = "unkown members"
         profile = socialdata.get_user_profile(helpers.get_user_email())
         values['name'] = profile.name
         if group:
@@ -157,4 +141,4 @@ class GroupJoinHandler(webapp2.RequestHandler): #Handles /group-join
             else:
                 membership_data.save_membership(helpers.get_user_email(), groupname)
                 values['successmsg'] = "Everything worked out fine."
-            helpers.render_template(self, 'group-list.html', values) #show group creation page 
+            helpers.render_template(self, 'group-list.html', values) #show group creation page

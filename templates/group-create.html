@@ -1,13 +1,22 @@
 {% extends "_base.html" %}
 {% block content %}
+<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="/i/creategroup.css">
     <br><b>Groups You've Created</b><br>
+=======
+    <br><b>Groups You've Made</b><br>
+>>>>>>> 69f8f2ec62fb02aba523b6076ec1176c4d8301f6
     {% for group in groups %}
     <a href="/g/{{group}}">{{group}}</a>
     
     <br>
     {% endfor %}
     <br><br>
+<<<<<<< HEAD
     <form method"post" action="/group-edit">
          <button type="submit">Create Group</button>
 {% endblock %}
+=======
+    <a href="/group-edit" id="edit_button">Create Group</a>
+{% endblock %}
+>>>>>>> 69f8f2ec62fb02aba523b6076ec1176c4d8301f6
