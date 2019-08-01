@@ -55,7 +55,7 @@ class ProfileSaveHandler(webapp2.RequestHandler):
                 values['errormsg'] = error_text
             else:
                 socialdata.save_profile(name, email, coursesList, school)  # save profile if everything is fine
-                values['successmsg'] = "Everything worked out fine."
+                values['successmsg'] = "Success!"
             helpers.render_template(self, 'profile-edit.html', values) #show page
 
 

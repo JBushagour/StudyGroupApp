@@ -1,6 +1,6 @@
 <html>
     <head>
-         <link rel="stylesheet" href="/i/style.css">  
+         <link rel="stylesheet" tyep="text/css" href="/i/style.css">  
     </head>
     <body>
         <div id="topmenu">
@@ -8,18 +8,27 @@
             {% if login_url %}
             <a href="{{login_url}}">Login</a>
             {% else %}
-            <a href="{{logout_url}}">Logout</a>
-            <a href="/profile-edit">Edit Profile</a>
-            <a href="/p/{{name}}">View Profile</a>
+            <a href="{{logout_url}}">Logout</a> 
+           <!-- <a href="/profile-edit">Edit Profile</a>
+            <a href="/p/{{name}}">View Profile</a>-->
+                        <div class="drop">
+                <button class="profdrop">Profile ▼</button>
+                <div class="profile-drop">
+                    <!––Links included in profile dropdown-->
+                    <a href="/p/{{name}}">View Profile</a><br>
+                    <a href="/profile-edit">Edit Profile</a>
+                    </div>
+
             <!––Dropdown for group-->
-            <div class="dropdown">
+            
+                </div>
+                <div class="dropdown">
                 <button class="dropbtn">Groups ▼</button>
                 <div class="dropdown-content">
                     <!––Links included in group dropdown-->
-                    <a href="/group-list">List Groups</a>
-                    <a href="/group-create">Create Groups</a>
+                    <a href="/group-list">List<br> Groups</a><br>
+                    <a href="/group-create">Create<br> Groups</a>
                     </div>
-                </div>
             {% endif %}
             <div class="studigroup"> StudiGroup </div>
             <img class="studigroup" id="logo" src="https://i.ibb.co/SXMrttq/book.png" alt="book" border="0">
