@@ -24,7 +24,7 @@ li a {
 
 li a:hover {
   background-color: #72DFE5;
-
+  width: 200px;
 }
 body{
     font-family: Helvetica, sans-serif;
