@@ -1,7 +1,7 @@
 from group_model import Group
 
 
-def save_group(name, description, course, member_limit, group_admin, school): #this function saves the group
+def save_group(name, description, course, member_limit, group_admin, school, meet, time): #this function saves the group
     p = get_group_by_name(name)
     if p: #if it exists, we update the group
         p.name = name
@@ -10,11 +10,13 @@ def save_group(name, description, course, member_limit, group_admin, school): #t
         p.member_limit = member_limit
         p.group_admin = group_admin
         p.school = school
+        p.meet = meet
+        p.time = time
     else: #otherwise we create a new group 
         p = Group(
             name=name, description=description, course=course,
             member_limit=member_limit, group_admin=group_admin,
-            school=school
+            school=school, meet=meet, time=time
             )
     p.put()
 

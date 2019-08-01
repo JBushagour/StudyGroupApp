@@ -4,7 +4,6 @@ import socialdata
 import helpers
 import membership_data
 
-
 class GroupCreateHandler(webapp2.RequestHandler): #Handles /group-create
     def get(self):
         profile = socialdata.get_user_profile(helpers.get_user_email())
@@ -43,6 +42,13 @@ class GroupSaveHandler(webapp2.RequestHandler):  #Handles /group-save
             description = self.request.get("description")
             member_limit = self.request.get("quantity") #lines 35 - 42 set default values in group
             group_admin = helpers.get_user_email()
+
+            meet = self.request.get("meet")
+            time = self.request.get("time")
+            print("***********")
+            print(meet)
+            print(time)
+
             school = profile.school
             values = helpers.get_template_parameters()
             group_name.strip() #lines 49- 57 are name nonos
@@ -58,18 +64,24 @@ class GroupSaveHandler(webapp2.RequestHandler):  #Handles /group-save
                     error_text += "Your name can't have ' / '\n"
                 elif i == '.':
                     error_text += "Your name can't have ' . '\n"
+                elif i == '#':
+                    error_text += "Your name can't have ' # '\n"
             values['group_name'] = group_name #set template values
             values['courses'] = profile.courses
             values['description'] = description
             values['member_limit'] = member_limit
             values['name'] = profile.name
+
+            values['meeting_date'] = meet
+            values['meeting_time'] = time
+
             if group_data.get_group_by_name(group_name):
                 error_text += "This group name is already taken"
             if error_text: #print error text if there's a problem
                 values['errormsg'] = error_text
             else:
                 membership_data.save_membership(helpers.get_user_email(), group_name)
-                group_data.save_group(group_name, description, course, int(member_limit), group_admin, school) #print success message if no problem saving
+                group_data.save_group(group_name, description, course, int(member_limit), group_admin, school, meet, time) #print success message if no problem saving
                 values['successmsg'] = "Everything worked out fine."
             helpers.render_template(self, 'group-edit.html', values) #go back to edit render
 
@@ -91,6 +103,8 @@ class GroupViewHandler(webapp2.RequestHandler):  #Handles /group-view, CURRENTLY
             values['course'] = group.course
             values['school'] = group.school
             values['description'] = group.description
+            values['meeting_date'] = group.meet
+            values['meeting_time'] = group.time
             values['admin'] = group.group_admin
             values["members"] = membership_data.get_members_from_group(groupname)
             helpers.render_template(self, 'group-view.html', values)
