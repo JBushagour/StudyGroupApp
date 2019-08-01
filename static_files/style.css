@@ -3,27 +3,23 @@ body{
     font-size: 12pt;
     background-color: white;
     min-width:900px;        /* Suppose you want minimum width of 1000px */
-
 }
-
 a{
     text-decoration: underline;
 }
-
 a:hover{
     text-decoration: none;
     background-color: #72DFE5
 }
-
 #successmsg {
     font-weight: bold;
-    color: blue;
+    color: rgb(18, 116, 18);
     position: absolute;
 }
 
 #errormsg {
     font-weight: bold;
-    color: red;
+    color: rgb(158, 13, 13);
     position: absolute;
 }
 

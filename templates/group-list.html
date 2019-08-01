@@ -1,13 +1,13 @@
 {% extends "_base.html" %}
 {% block content %}
 <br><br><br>
-    <br><b>Groups you are in </b><br>
+    <br><b>Your Groups</b><br>
     {% for ingroup in ingroups %}
     <a href="/g/{{ingroup}}">{{ingroup}}  </a>
-    <a href="/g/leave/{{ingroup}}"> leave this group </a>
+    <a href="/g/leave/{{ingroup}}"><br> Leave Group </a>
     <br>
     {% endfor %}
-    <br><b>Groups you can join: </b><br>
+    <br><b>Groups You Can Join </b><br>
     {% for group in groups %}
     <a href="/g/{{group}}">{{group}}  </a> <div>          </div> <a href="/g/join/{{group}}"> join this group </a>
     <br><br><br>
