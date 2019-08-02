@@ -2,7 +2,13 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="/currentgroups">
 <br><br><br>
-    <br><b>Your Groups</b><br>
+    <br><b>Groups You've Created</b><br>
+    {% for admin_group in admin_groups %}
+    <a href="/g/{{admin_group}}">{{admin_group}}</a>
+    <a href="/g/delete/{{admin_group}}" id="delete_button">Delete Group</a>    
+    <br>
+    {% endfor %}
+    <br><b>Groups You're in</b><br>
     {% for ingroup in ingroups %}
     <a href="/g/{{ingroup}}">{{ingroup}}  </a>
     <a href="/g/leave/{{ingroup}}"><br> Leave Group </a>

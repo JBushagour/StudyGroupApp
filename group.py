@@ -10,13 +10,7 @@ class GroupCreateHandler(webapp2.RequestHandler): #Handles /group-create
         if not profile: #if the user does not have a profile, go to home
             self.redirect('/')
         else: #otherwise, allow them to create group
-            values = helpers.get_template_parameters()
-            values['name'] = profile.name
-            listOfNames = []
-            for group in group_data.get_admin_groups(profile.email):
-                listOfNames.append(group.name)
-            values["groups"] = listOfNames
-            helpers.render_template(self, 'group-create.html', values) #show group creation page
+            self.redirect("/group-edit")
 
 
 class GroupEditHandler(webapp2.RequestHandler): #Handles /group-edit
@@ -135,6 +129,10 @@ class GroupListHandler(webapp2.RequestHandler): #Handles /group-list
                     if group_data.get_group_by_name(group).group_admin != profile.email:
                         listOfInGroupsNoAdmin.append(group)
             values['name'] = profile.name
+            listOfNames = []
+            for group in group_data.get_admin_groups(profile.email):
+                listOfNames.append(group.name)
+            values["admin_groups"] = listOfNames
             values['groups'] = listOfGroupNames
             values["ingroups"] = listOfInGroupsNoAdmin
             helpers.render_template(self, 'group-list.html', values) #show group creation page
