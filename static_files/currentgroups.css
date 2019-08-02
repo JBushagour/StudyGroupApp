@@ -53,3 +53,24 @@ form  {
     height: 45px;
     width: 55px;
 }
+
+.group_action{
+    display: flex;
+    justify-content: space-around;
+}
+
+#action{
+    flex-grow: 2;
+}
+#group{
+    flex-grow: 1;
+}
+
+legend {
+    font-size: 15pt;
+}
+
+fieldset{
+    font-family: sans-serif;
+    font-size: 20px;
+}

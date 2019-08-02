@@ -1,60 +1,37 @@
 {% extends "_base.html" %}
 {% block content %}
-<<<<<<< HEAD
-<link rel="stylesheet" type="text/css" href="/currentgroups">
-<br><br><br>
-    <br><b>Groups You've Created</b><br>
-    {% for admin_group in admin_groups %}
-    <a href="/g/{{admin_group}}">{{admin_group}}</a>
-    <a href="/g/delete/{{admin_group}}" id="delete_button">Delete Group</a>    
+<link rel="stylesheet" type="text/css" href="/i/currentgroups.css">
+<h1><center><i> Create a Group </i></center></h1>
+    <fieldset>
+        <br><legend>Groups You've Created</legend>
+        {% for admin_group in admin_groups %}
+            <div class="group_action">
+                <a id="group" href="/g/{{admin_group}}"><b>{{admin_group}}</b></a>
+                <a id="action" href="/g/delete/{{admin_group}}" id="delete_button"><b>Delete Group</b></a>    
+            </div>
+            <br>
+        {% endfor %}
+    </fieldset>
     <br>
-    {% endfor %}
-    <br><b>Groups You're in</b><br>
-    {% for ingroup in ingroups %}
-    <a href="/g/{{ingroup}}">{{ingroup}}  </a>
-    <a href="/g/leave/{{ingroup}}"><br> Leave Group </a>
-=======
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="/i/currentgroups.css"
-    </head>
-
-    <h1><i>Active Groups</h1></i>
-
-<form>
-    <form method="post" action="/view-group">
- <fieldset>
-     <legend><b>YOU ARE THE ADMIN OF:</b></legend>
-    {% for group in groups %}
-    <a href="/g/{{group}}">{{group}}</a>
-    <a href="/g/delete/{{group}}" id="delete_button">Delete Group</a>    
->>>>>>> ce1e5fe27d521665e428f5034eb8d3fc2796ad23
+    <fieldset>
+        <br><legend>Groups You're in</legend>
+        {% for ingroup in ingroups %}
+            <div class="group_action">
+                <a id="group" href="/g/{{ingroup}}"><b>{{ingroup}}</b></a>
+                <a id="action" href="/g/leave/{{ingroup}}"><b>Leave Group</b></a>
+            </div>
+            <br>
+        {% endfor %}
+    </fieldset>
     <br>
-    {% endfor %}
-    <br><br>
-    <a href="/group-edit" id="edit_button">Create Group</a>
-{% endblock %}  
-     
-     <hr size="2" color="#72DFE5">
- </fieldset>
-</form>
-    
-   {% for group in groups %}
-    <a href="/g/{{group}}">{{group}}</a>
-    <a href="/g/delete/{{group}}" id="delete_button">Delete Group</a>    
-    <br>
-    {% endfor %}
-    <br><br>
-    <a href="/group-edit" id="edit_button">Create Group</a>
-{% endblock %}      
-        
-     
-     <hr size="2" color="#72DFE5">
- </fieldset>
-</form>
- 
-    
-
-    </html>
+    <fieldset>
+        <br><legend>Groups You Can Join</legend>
+        {% for group in groups %}
+            <div class="group_action">
+                <a id="group" href="/g/{{group}}"><b>{{group}}</b></a>
+                <a id="action" href="/g/join/{{group}}"><b>Join Group</b></a>
+            </div>
+            <!-- <br> -->
+        {% endfor %}
+    </fieldset>
 {% endblock %}
